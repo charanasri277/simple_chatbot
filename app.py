@@ -25,7 +25,8 @@ def main():
     st.title("Chatbot with Gemini Models")
 
     # 👇 Hidden API key usage
-    api_key = Config.GEMINI_API_KEY  # API key is now used directly, not shown in UI
+    api_key = Config.GEMINI_API_KEY
+
 
     model_name = get_model_name(model_choice)
     chat_session = create_chat_session(api_key, model_name, temperature, top_p, top_k, max_output_tokens)
