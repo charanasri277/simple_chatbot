@@ -1,33 +1,32 @@
 import streamlit as st
 from config import Config
-from utils import apply_css, initialize_session, get_model_name, create_chat_session
+from utils import apply\_css, initialize\_session, get\_model\_name, create\_chat\_session
 
 def main():
-    st.set_page_config(page_title="Chatbot with Gemini Models", layout="wide")
+st.set\_page\_config(page\_title="Chatbot with Gemini Models", layout="wide")
 
-    initialize_session()
+```
+initialize_session()
 
-    st.sidebar.title("Settings")
-    st.session_state['dark_mode'] = st.sidebar.checkbox("Dark Mode", value=st.session_state['dark_mode'])
+st.sidebar.title("Settings")
+st.session_state['dark_mode'] = st.sidebar.checkbox("Dark Mode", value=st.session_state['dark_mode'])
 
-    model_choice = st.sidebar.selectbox(
-        "Choose Model:",
-        ["Gemini 1.5 Flash", "Gemini 1.5 Pro", "Gemini 1.0 Pro"]
-    )
+model_choice = st.sidebar.selectbox(
+    "Choose Model:",
+    ["Gemini 1.5 Flash", "Gemini 1.5 Pro", "Gemini 1.0 Pro"]
+)
 
-    temperature = st.sidebar.slider("Temperature", 0.0, 1.0, 1.0)
-    top_p = st.sidebar.slider("Top P", 0.0, 1.0, 0.95)
-    top_k = st.sidebar.slider("Top K", 0, 100, 64)
-    max_output_tokens = st.sidebar.slider("Max Output Tokens", 1, 8192, 8192)
+temperature = st.sidebar.slider("Temperature", 0.0, 1.0, 1.0)
+top_p = st.sidebar.slider("Top P", 0.0, 1.0, 0.95)
+top_k = st.sidebar.slider("Top K", 0, 100, 64)
+max_output_tokens = st.sidebar.slider("Max Output Tokens", 1, 8192, 8192)
 
-    apply_css(st.session_state['dark_mode'])
+apply_css(st.session_state['dark_mode'])
 
-    st.title("Chatbot with Gemini Models")
+st.title("Chatbot with Gemini Models")
 
-    # 👇 Hidden API key usage
-    api_key = Config.GEMINI_API_KEY
-
-
+api_key = st.text_input("Enter your Gemini API key:", type="password")
+if api_key:
     model_name = get_model_name(model_choice)
     chat_session = create_chat_session(api_key, model_name, temperature, top_p, top_k, max_output_tokens)
 
@@ -57,6 +56,8 @@ def main():
                         <div class="chat-bubble ai">{entry[1]} <br><small>{entry[2]}</small></div>
                     </div>
                 """, unsafe_allow_html=True)
+```
 
-if __name__ == "__main__":
-    main()
+if **name** == "**main**":
+main()
+
