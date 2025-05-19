@@ -58,6 +58,3 @@ if api_key:
                 """, unsafe_allow_html=True)
 ```
 
-if **name** == "**main**":
-main()
-
