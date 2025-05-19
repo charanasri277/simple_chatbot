@@ -1,29 +1,25 @@
-\[media pointer="file-service://file-8TRfm6FNhhayNCrqb58nx7"]
 class Config:
-DARK\_MODE\_CSS = """ <style>
-body { background-color: #2E2E2E; color: white; }
-.chat-bubble { color: white; }
-.chat-bubble.user { background-color: #2C3E50; }
-.chat-bubble.ai { background-color: #34495E; }
-.chat-icon.user { background-color: #1ABC9C; }
-.chat-icon.ai { background-color: #3498DB; } </style>
-"""
+    GEMINI_API_KEY = "AIzaSyCSyFw6GbmO724yym-plLlCLu_1pVsiJKc"
 
-```
-LIGHT_MODE_CSS = """
+    LIGHT_MODE_CSS = """
     <style>
-        body { background-color: #FFFFFF; color: black; }
-        .chat-bubble.user { background-color: #DCF8C6; }
-        .chat-bubble.ai { background-color: #ECECEC; }
-        .chat-icon.user { background-color: #34B7F1; }
-        .chat-icon.ai { background-color: #00BFA5; }
+        .chat-message.user { background-color: #e0f7fa; padding: 10px; border-radius: 10px; margin-bottom: 5px; }
+        .chat-message.ai { background-color: #f1f8e9; padding: 10px; border-radius: 10px; margin-bottom: 5px; }
     </style>
-"""
+    """
 
-SAFETY_SETTINGS = [
-    {"category": "HARM_CATEGORY_HARASSMENT", "threshold": "BLOCK_MEDIUM_AND_ABOVE"},
-    {"category": "HARM_CATEGORY_HATE_SPEECH", "threshold": "BLOCK_MEDIUM_AND_ABOVE"},
-    {"category": "HARM_CATEGORY_SEXUALLY_EXPLICIT", "threshold": "BLOCK_MEDIUM_AND_ABOVE"},
-    {"category": "HARM_CATEGORY_DANGEROUS_CONTENT", "threshold": "BLOCK_MEDIUM_AND_ABOVE"},
-] 
-```
+    DARK_MODE_CSS = """
+    <style>
+        .chat-message.user { background-color: #263238; color: white; padding: 10px; border-radius: 10px; margin-bottom: 5px; }
+        .chat-message.ai { background-color: #37474f; color: white; padding: 10px; border-radius: 10px; margin-bottom: 5px; }
+    </style>
+    """
+
+    SAFETY_SETTINGS = [
+        {"category": "HARM_CATEGORY_DEROGATORY", "threshold": 3},
+        {"category": "HARM_CATEGORY_VIOLENCE", "threshold": 3},
+        {"category": "HARM_CATEGORY_SEXUAL", "threshold": 3},
+        {"category": "HARM_CATEGORY_MEDICAL", "threshold": 3},
+        {"category": "HARM_CATEGORY_DANGEROUS", "threshold": 3},
+    ]
+
