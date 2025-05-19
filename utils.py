@@ -3,40 +3,38 @@ import os
 import google.generativeai as genai
 from config import Config
 
-def apply\_css(dark\_mode):
-css = Config.DARK\_MODE\_CSS if dark\_mode else Config.LIGHT\_MODE\_CSS
-st.markdown(css, unsafe\_allow\_html=True)
+def apply_css(dark_mode):
+    css = Config.DARK_MODE_CSS if dark_mode else Config.LIGHT_MODE_CSS
+    st.markdown(css, unsafe_allow_html=True)
 
-def initialize\_session():
-if 'dark\_mode' not in st.session\_state:
-st.session\_state\['dark\_mode'] = False
+def initialize_session():
+    if 'dark_mode' not in st.session_state:
+        st.session_state['dark_mode'] = False
 
-def get\_model\_name(model\_choice):
-if model\_choice == "Gemini 1.5 Flash":
-return "gemini-1.5-flash-latest"
-elif model\_choice == "Gemini 1.5 Pro":
-return "gemini-1.5-pro-latest"
-else:
-return "gemini-1.0-pro"
+def get_model_name(model_choice):
+    if model_choice == "Gemini 1.5 Flash":
+        return "gemini-1.5-flash-latest"
+    elif model_choice == "Gemini 1.5 Pro":
+        return "gemini-1.5-pro-latest"
+    else:
+        return "gemini-1.0-pro"
 
-def create\_chat\_session(api\_key, model\_name, temperature, top\_p, top\_k, max\_output\_tokens):
-os.environ\["GEMINI\_API\_KEY"] = api\_key
-genai.configure(api\_key=api\_key)
+def create_chat_session(api_key, model_name, temperature, top_p, top_k, max_output_tokens):
+    os.environ["GEMINI_API_KEY"] = api_key
+    genai.configure(api_key=api_key)
 
-```
-generation_config = {
-    "temperature": temperature,
-    "top_p": top_p,
-    "top_k": top_k,
-    "max_output_tokens": max_output_tokens,
-    "response_mime_type": "text/plain",
-}
+    generation_config = {
+        "temperature": temperature,
+        "top_p": top_p,
+        "top_k": top_k,
+        "max_output_tokens": max_output_tokens,
+        "response_mime_type": "text/plain",
+    }
 
-model = genai.GenerativeModel(
-    model_name=model_name,
-    safety_settings=Config.SAFETY_SETTINGS,
-    generation_config=generation_config,
-)
+    model = genai.GenerativeModel(
+        model_name=model_name,
+        safety_settings=Config.SAFETY_SETTINGS,
+        generation_config=generation_config,
+    )
 
-return model.start_chat(history=[])
-```
+    return model.start_chat(history=[])
