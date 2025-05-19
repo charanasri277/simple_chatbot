@@ -1,5 +1,6 @@
 import streamlit as st
-from config import config
+from config import Config
+
 from utils import apply_css, initialize_session, get_model_name, create_chat_session
 
 def main():
