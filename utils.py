@@ -1,10 +1,10 @@
 import streamlit as st
 import google.generativeai as genai
-from google.generativeai.types import HarmCategory, HarmBlockThreshold
+from config import Config
 
 def apply_css(dark_mode):
-    mode = "#121212" if dark_mode else "#ffffff"
-    st.markdown(f"<style>body {{ background-color: {mode}; }}</style>", unsafe_allow_html=True)
+    css = Config.DARK_MODE_CSS if dark_mode else Config.LIGHT_MODE_CSS
+    st.markdown(css, unsafe_allow_html=True)
 
 def initialize_session():
     if 'dark_mode' not in st.session_state:
@@ -21,14 +21,6 @@ def get_model_name(choice):
 def create_chat_session(api_key, model_name, temperature, top_p, top_k, max_output_tokens):
     genai.configure(api_key=api_key)
 
-    safety_settings = [
-        {"category": HarmCategory.HARM_CATEGORY_DEROGATORY, "threshold": HarmBlockThreshold.BLOCK_LOW},
-        {"category": HarmCategory.HARM_CATEGORY_VIOLENCE, "threshold": HarmBlockThreshold.BLOCK_LOW},
-        {"category": HarmCategory.HARM_CATEGORY_SEXUAL, "threshold": HarmBlockThreshold.BLOCK_LOW},
-        {"category": HarmCategory.HARM_CATEGORY_MEDICAL, "threshold": HarmBlockThreshold.BLOCK_LOW},
-        {"category": HarmCategory.HARM_CATEGORY_DANGEROUS, "threshold": HarmBlockThreshold.BLOCK_LOW}
-    ]
-
     model = genai.GenerativeModel(
         model_name=model_name,
         generation_config={
@@ -37,7 +29,8 @@ def create_chat_session(api_key, model_name, temperature, top_p, top_k, max_outp
             "top_k": top_k,
             "max_output_tokens": max_output_tokens
         },
-        safety_settings=safety_settings
+        safety_settings=Config.SAFETY_SETTINGS
     )
 
     return model.start_chat()
+
