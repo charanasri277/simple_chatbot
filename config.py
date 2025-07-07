@@ -1,3 +1,5 @@
+from google.generativeai.types import HarmCategory, HarmBlockThreshold
+
 class Config:
     GEMINI_API_KEY = "AIzaSyCSyFw6GbmO724yym-plLlCLu_1pVsiJKc"
 
@@ -16,10 +18,9 @@ class Config:
     """
 
     SAFETY_SETTINGS = [
-        {"category": "HARM_CATEGORY_DEROGATORY", "threshold": 3},
-        {"category": "HARM_CATEGORY_VIOLENCE", "threshold": 3},
-        {"category": "HARM_CATEGORY_SEXUAL", "threshold": 3},
-        {"category": "HARM_CATEGORY_MEDICAL", "threshold": 3},
-        {"category": "HARM_CATEGORY_DANGEROUS", "threshold": 3},
+        {"category": HarmCategory.HARM_CATEGORY_DEROGATORY, "threshold": HarmBlockThreshold.BLOCK_MEDIUM},
+        {"category": HarmCategory.HARM_CATEGORY_VIOLENCE, "threshold": HarmBlockThreshold.BLOCK_MEDIUM},
+        {"category": HarmCategory.HARM_CATEGORY_SEXUAL, "threshold": HarmBlockThreshold.BLOCK_MEDIUM},
+        {"category": HarmCategory.HARM_CATEGORY_MEDICAL, "threshold": HarmBlockThreshold.BLOCK_MEDIUM},
+        {"category": HarmCategory.HARM_CATEGORY_DANGEROUS, "threshold": HarmBlockThreshold.BLOCK_MEDIUM},
     ]
-
