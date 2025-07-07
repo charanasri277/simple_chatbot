@@ -1,8 +1,9 @@
 import streamlit as st
 import google.generativeai as genai
+from google.generativeai.types import HarmCategory, HarmBlockThreshold
 
 def apply_css(dark_mode):
-    mode = "dark" if dark_mode else "light"
+    mode = "#121212" if dark_mode else "#ffffff"
     st.markdown(f"<style>body {{ background-color: {mode}; }}</style>", unsafe_allow_html=True)
 
 def initialize_session():
@@ -21,11 +22,11 @@ def create_chat_session(api_key, model_name, temperature, top_p, top_k, max_outp
     genai.configure(api_key=api_key)
 
     safety_settings = [
-        {"category": "HARM_CATEGORY_DEROGATORY", "threshold": 2},
-        {"category": "HARM_CATEGORY_VIOLENCE", "threshold": 2},
-        {"category": "HARM_CATEGORY_SEXUAL", "threshold": 2},
-        {"category": "HARM_CATEGORY_MEDICAL", "threshold": 2},
-        {"category": "HARM_CATEGORY_DANGEROUS", "threshold": 2}
+        {"category": HarmCategory.HARM_CATEGORY_DEROGATORY, "threshold": HarmBlockThreshold.BLOCK_LOW},
+        {"category": HarmCategory.HARM_CATEGORY_VIOLENCE, "threshold": HarmBlockThreshold.BLOCK_LOW},
+        {"category": HarmCategory.HARM_CATEGORY_SEXUAL, "threshold": HarmBlockThreshold.BLOCK_LOW},
+        {"category": HarmCategory.HARM_CATEGORY_MEDICAL, "threshold": HarmBlockThreshold.BLOCK_LOW},
+        {"category": HarmCategory.HARM_CATEGORY_DANGEROUS, "threshold": HarmBlockThreshold.BLOCK_LOW}
     ]
 
     model = genai.GenerativeModel(
