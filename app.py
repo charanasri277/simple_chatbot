@@ -1,3 +1,4 @@
+
 import streamlit as st
 from config import Config
 from utils import apply_css, initialize_session, get_model_name, create_chat_session
@@ -24,7 +25,7 @@ def main():
 
     st.title("Chatbot with Gemini Models")
 
-    # 👇 Hidden API key usage
+    # 👇 Use your API key stored in config.py
     api_key = Config.GEMINI_API_KEY
 
     model_name = get_model_name(model_choice)
